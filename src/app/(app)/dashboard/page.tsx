@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { ProgressRing } from "@/components/progress-ring";
 import { ProgrammCard, TeaserCard } from "@/components/programm-card";
+import { createClient } from "@/lib/supabase/server";
 import {
   getAktuelleAssistenz,
   getTeaserProgramme,
@@ -9,7 +10,24 @@ import {
 
 export default async function DashboardPage() {
   const assistenz = await getAktuelleAssistenz();
-  if (!assistenz) redirect("/login");
+
+  if (!assistenz) {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user?.app_metadata?.role === "admin") {
+      // Admin-Accounts haben bewusst keine Zeile in assistenzen — gehören auf /admin.
+      redirect("/admin");
+    }
+
+    console.warn(
+      "Dashboard: eingeloggter User ohne assistenzen-Zeile, kein Admin — zurück zu /login.",
+      { userId: user?.id, email: user?.email },
+    );
+    redirect("/login");
+  }
 
   const programme = await getZugeordneteProgrammeMitFortschritt(assistenz.id);
   const teaser = await getTeaserProgramme(programme.map((p) => p.id));
