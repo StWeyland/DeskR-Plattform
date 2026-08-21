@@ -18,6 +18,11 @@ export async function signIn(
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
+    console.error("signInWithPassword fehlgeschlagen:", {
+      message: error.message,
+      status: error.status,
+      code: error.code,
+    });
     return { error: "E-Mail oder Passwort ist falsch." };
   }
 
