@@ -12,12 +12,14 @@ Supabase, eigenständiges Setup (kein gemeinsames Projekt mit MRH-Coaching).
       Programm-Detailseite mit Session-Akkordeon + eigenem Bearbeitungsstatus
 - [x] SQL-Migration für die 6 Kern-Tabellen + RLS + Teaser-Felder
       (`supabase/migrations/0001_init.sql`)
-- [ ] **Branding von desk-revolution.de** — noch nicht übernommen. Der Netzwerkzugriff auf
-      die Live-Domain war in der Entwicklungsumgebung durch die Egress-Policy blockiert.
-      Aktuell wird ein Platzhalter-Farbschema verwendet (dunkler Hintergrund, ein Akzent —
-      siehe `src/app/globals.css`, oben klar als Platzhalter markiert). Bitte Farbwerte,
-      Fonts und das Porträtfoto (`public/stefanie-weyland.png`, wird von der
-      Login-/Passwort-Seite referenziert) nachliefern oder Zugriff auf die Domain freigeben.
+- [x] Branding von desk-revolution.de: Farbpalette + Typografie (League Spartan / Playfair
+      Display) 1:1 übernommen (`src/app/globals.css`), Porträtfoto extern eingebunden
+      (`next.config.ts` erlaubt `desk-revolution.de` als Bildquelle)
+- [ ] Supabase-Verbindungstest (Kickoff Abschnitt 0.1.3) — noch nicht von mir selbst
+      verifiziert. Der Netzwerkzugriff aus dieser Entwicklungsumgebung war zum Testzeitpunkt
+      für alle externen Domains blockiert (nicht nur Supabase) — vermutlich eine
+      Session-übergreifende Egress-Policy, die erst bei einer neu gestarteten Session greift.
+      Vercel-Deployment ist laut Rückmeldung grün; bitte bei Gelegenheit selbst gegenprüfen.
 - [ ] SMTP (hallo@desk-revolution.de) — noch nicht eingerichtet
 - [ ] Phase 2 (Stripe) — bewusst noch nicht begonnen
 
