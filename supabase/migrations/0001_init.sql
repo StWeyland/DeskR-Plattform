@@ -5,39 +5,6 @@
 create extension if not exists "pgcrypto";
 
 -- ---------------------------------------------------------------------------
--- Hilfsfunktionen für RLS
--- ---------------------------------------------------------------------------
-
--- Admin-Kennzeichnung läuft über app_metadata.role = 'admin' im Auth-User
--- (wird per Service-Role-Key gesetzt, z. B. einmalig für Stefanies Account):
---   update auth.users set raw_app_meta_data =
---     raw_app_meta_data || '{"role":"admin"}'::jsonb
---   where email = 'stefanie@desk-revolution.de';
-create or replace function public.is_admin()
-returns boolean
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select coalesce(
-    (auth.jwt() -> 'app_metadata' ->> 'role') = 'admin',
-    false
-  );
-$$;
-
--- Liefert die assistenzen.id des aktuell eingeloggten Users (falls vorhanden).
-create or replace function public.current_assistenz_id()
-returns uuid
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select id from public.assistenzen where user_id = auth.uid();
-$$;
-
--- ---------------------------------------------------------------------------
 -- Tabellen
 -- ---------------------------------------------------------------------------
 
@@ -109,6 +76,40 @@ create table if not exists public.assistenz_status (
 );
 create index if not exists assistenz_status_assistenz_id_idx on public.assistenz_status(assistenz_id);
 create index if not exists assistenz_status_session_id_idx on public.assistenz_status(session_id);
+
+-- ---------------------------------------------------------------------------
+-- Hilfsfunktionen für RLS (nach den Tabellen, da current_assistenz_id() auf
+-- public.assistenzen zugreift)
+-- ---------------------------------------------------------------------------
+
+-- Admin-Kennzeichnung läuft über app_metadata.role = 'admin' im Auth-User
+-- (wird per Service-Role-Key gesetzt, z. B. einmalig für Stefanies Account):
+--   update auth.users set raw_app_meta_data =
+--     raw_app_meta_data || '{"role":"admin"}'::jsonb
+--   where email = 'stefanie@desk-revolution.de';
+create or replace function public.is_admin()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select coalesce(
+    (auth.jwt() -> 'app_metadata' ->> 'role') = 'admin',
+    false
+  );
+$$;
+
+-- Liefert die assistenzen.id des aktuell eingeloggten Users (falls vorhanden).
+create or replace function public.current_assistenz_id()
+returns uuid
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select id from public.assistenzen where user_id = auth.uid();
+$$;
 
 -- ---------------------------------------------------------------------------
 -- updated_at-Trigger
