@@ -15,7 +15,7 @@ export async function signIn(
   const password = String(formData.get("password") ?? "");
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
     console.error("signInWithPassword fehlgeschlagen:", {
@@ -26,5 +26,8 @@ export async function signIn(
     return { error: "E-Mail oder Passwort ist falsch." };
   }
 
+  if (data.user.app_metadata?.role === "admin") {
+    redirect("/admin");
+  }
   redirect("/dashboard");
 }
