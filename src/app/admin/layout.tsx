@@ -11,8 +11,9 @@ export default async function AdminLayout({ children }: { children: ReactNode })
       <header className="border-b border-surface-border">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <nav className="flex items-center gap-6">
-            <Link href="/admin" className="text-lg font-semibold tracking-tight">
-              Desk R. Admin
+            <Link href="/admin" className="flex items-baseline gap-2">
+              <span className="font-serif text-xl tracking-tight text-burgundy">Desk R.</span>
+              <span className="eyebrow">Admin</span>
             </Link>
             <Link href="/admin/programme" className="text-sm text-muted hover:text-foreground">
               Programme
@@ -22,7 +23,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
             </Link>
           </nav>
           <form action={signOut}>
-            <button type="submit" className="text-sm text-muted hover:text-foreground">
+            <button type="submit" className="btn-ghost text-xs">
               Abmelden
             </button>
           </form>

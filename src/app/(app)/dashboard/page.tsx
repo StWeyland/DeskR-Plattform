@@ -22,8 +22,8 @@ export default async function DashboardPage() {
     <div className="space-y-10">
       <section className="flex items-center justify-between rounded-lg border border-surface-border bg-surface p-6">
         <div>
-          <p className="text-sm text-muted">Willkommen zurück</p>
-          <h1 className="mt-1 text-2xl font-semibold">
+          <p className="eyebrow">Willkommen zurück</p>
+          <h1 className="mt-1 font-serif text-3xl italic text-burgundy">
             {assistenz.name ?? assistenz.email}
           </h1>
         </div>
@@ -31,9 +31,7 @@ export default async function DashboardPage() {
       </section>
 
       <section>
-        <h2 className="mb-4 text-sm font-medium uppercase tracking-wide text-muted">
-          Deine Programme
-        </h2>
+        <h2 className="eyebrow mb-4">Deine Programme</h2>
         {programme.length === 0 ? (
           <p className="text-sm text-muted">
             Dir ist noch kein Programm zugeordnet. Melde dich bei deinem Ansprechpartner.
@@ -49,9 +47,7 @@ export default async function DashboardPage() {
 
       {teaser.length > 0 && (
         <section>
-          <h2 className="mb-4 text-sm font-medium uppercase tracking-wide text-muted">
-            Der nächste Schritt
-          </h2>
+          <h2 className="eyebrow mb-4">Der nächste Schritt</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {teaser.map((p) => (
               <TeaserCard key={p.id} programm={p} />

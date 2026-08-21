@@ -11,7 +11,7 @@ export default async function AdminHomePage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-semibold">Übersicht</h1>
+      <h1 className="font-serif text-3xl text-burgundy">Übersicht</h1>
       <div className="grid gap-4 sm:grid-cols-2">
         <Link
           href="/admin/programme"

@@ -14,11 +14,8 @@ export default async function AdminProgrammeListPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Programme</h1>
-        <Link
-          href="/admin/programme/neu"
-          className="rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-foreground"
-        >
+        <h1 className="font-serif text-3xl text-burgundy">Programme</h1>
+        <Link href="/admin/programme/neu" className="btn-primary">
           Neues Programm
         </Link>
       </div>
@@ -31,7 +28,7 @@ export default async function AdminProgrammeListPage() {
             className="flex items-center justify-between px-5 py-4 hover:bg-background/40"
           >
             <div>
-              <p className="font-medium">{p.titel}</p>
+              <p className="font-serif text-lg text-burgundy">{p.titel}</p>
               <p className="text-sm text-muted">/{p.slug}</p>
             </div>
             <span className="text-xs text-muted">{STATUS_LABEL[p.status] ?? p.status}</span>

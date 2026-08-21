@@ -13,7 +13,7 @@ export function ProgrammCard({ programm }: { programm: ProgrammMitFortschritt })
       href={`/programme/${programm.slug}`}
       className="block rounded-lg border border-surface-border bg-surface p-5 transition hover:border-accent"
     >
-      <h3 className="font-medium">{programm.titel}</h3>
+      <h3 className="font-serif text-lg text-burgundy">{programm.titel}</h3>
       {programm.untertitel && (
         <p className="mt-1 text-sm text-muted">{programm.untertitel}</p>
       )}
@@ -30,10 +30,8 @@ export function ProgrammCard({ programm }: { programm: ProgrammMitFortschritt })
 export function TeaserCard({ programm }: { programm: Programm }) {
   return (
     <div className="relative block rounded-lg border border-dashed border-surface-border bg-surface/50 p-5">
-      <span className="mb-2 inline-block rounded-full bg-surface-border px-2 py-0.5 text-xs text-muted">
-        Nächste Stufe
-      </span>
-      <h3 className="font-medium text-muted">{programm.titel}</h3>
+      <span className="eyebrow mb-2 inline-block">Nächste Stufe</span>
+      <h3 className="font-serif text-lg text-muted">{programm.titel}</h3>
       {programm.untertitel && (
         <p className="mt-1 text-sm text-muted/70">{programm.untertitel}</p>
       )}
@@ -49,7 +47,7 @@ export function TeaserCard({ programm }: { programm: Programm }) {
         href={`https://desk-revolution.de/${programm.slug}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-3 inline-block text-sm text-accent underline underline-offset-2"
+        className="mt-3 inline-block text-sm font-semibold text-accent underline underline-offset-2"
       >
         Mehr erfahren
       </a>

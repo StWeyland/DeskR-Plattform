@@ -3,7 +3,7 @@ import { createProgramm } from "../actions";
 export default function NeuesProgrammPage() {
   return (
     <div className="max-w-xl space-y-6">
-      <h1 className="text-2xl font-semibold">Neues Programm</h1>
+      <h1 className="font-serif text-3xl text-burgundy">Neues Programm</h1>
       <form action={createProgramm} className="space-y-4">
         <Field label="Titel" name="titel" required />
         <Field label="Slug (URL)" name="slug" required placeholder="ki-anwender" />
@@ -36,10 +36,7 @@ export default function NeuesProgrammPage() {
           Preis auf dem Teaser anzeigen
         </label>
 
-        <button
-          type="submit"
-          className="rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-foreground"
-        >
+        <button type="submit" className="btn-primary">
           Programm anlegen
         </button>
       </form>

@@ -24,12 +24,12 @@ export default async function AdminProgrammDetailPage({
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="text-2xl font-semibold">{programm.titel}</h1>
+        <h1 className="font-serif text-3xl text-burgundy">{programm.titel}</h1>
         <p className="mt-1 text-sm text-muted">/{programm.slug}</p>
       </div>
 
       <section className="space-y-4">
-        <h2 className="text-sm font-medium uppercase tracking-wide text-muted">Sessions</h2>
+        <h2 className="eyebrow">Sessions</h2>
         <div className="divide-y divide-surface-border rounded-lg border border-surface-border bg-surface">
           {(sessions ?? []).map((s) => (
             <div key={s.id} className="flex items-center justify-between px-5 py-3">
@@ -60,10 +60,7 @@ export default async function AdminProgrammDetailPage({
             <input type="checkbox" name="veroeffentlicht" className="accent-accent" />
             Sofort veröffentlichen
           </label>
-          <button
-            type="submit"
-            className="rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-foreground"
-          >
+          <button type="submit" className="btn-primary">
             Hinzufügen
           </button>
         </form>

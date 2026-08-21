@@ -14,7 +14,7 @@ export default async function AdminAssistenzenPage() {
 
   return (
     <div className="space-y-10">
-      <h1 className="text-2xl font-semibold">Assistenzen</h1>
+      <h1 className="font-serif text-3xl text-burgundy">Assistenzen</h1>
 
       <form action={inviteAssistenz} className="flex flex-wrap items-end gap-3">
         <div className="space-y-1">
@@ -39,10 +39,7 @@ export default async function AdminAssistenzenPage() {
             className="rounded-md border border-surface-border bg-surface px-3 py-2 text-sm"
           />
         </div>
-        <button
-          type="submit"
-          className="rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-foreground"
-        >
+        <button type="submit" className="btn-primary">
           Einladen
         </button>
       </form>
@@ -58,7 +55,7 @@ export default async function AdminAssistenzenPage() {
             <div key={a.id} className="space-y-2 px-5 py-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium">{a.name ?? a.email}</p>
+                  <p className="font-serif text-lg text-burgundy">{a.name ?? a.email}</p>
                   <p className="text-sm text-muted">{a.email}</p>
                 </div>
               </div>

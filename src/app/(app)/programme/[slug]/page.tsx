@@ -21,7 +21,7 @@ export default async function ProgrammDetailPage({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold">{programm.titel}</h1>
+        <h1 className="font-serif text-3xl text-burgundy">{programm.titel}</h1>
         {programm.untertitel && <p className="mt-1 text-muted">{programm.untertitel}</p>}
       </div>
       {sessions.length === 0 ? (

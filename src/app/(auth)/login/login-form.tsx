@@ -9,8 +9,11 @@ export function LoginForm() {
   const [state, formAction, pending] = useActionState(signIn, initialState);
 
   return (
-    <form action={formAction} className="space-y-4">
-      <h1 className="text-xl font-medium">Anmelden</h1>
+    <form action={formAction} className="space-y-5">
+      <div>
+        <p className="eyebrow mb-2">Mitglieder-Login</p>
+        <h1 className="font-serif text-3xl text-burgundy">Anmelden</h1>
+      </div>
       <div className="space-y-1">
         <label htmlFor="email" className="text-sm text-muted">
           E-Mail
@@ -21,7 +24,7 @@ export function LoginForm() {
           type="email"
           required
           autoComplete="email"
-          className="w-full rounded-md border border-surface-border bg-surface px-3 py-2 text-sm outline-none focus:border-accent"
+          className="w-full rounded-lg border border-surface-border bg-surface px-3 py-2 text-sm text-foreground outline-none focus:border-accent"
         />
       </div>
       <div className="space-y-1">
@@ -34,15 +37,11 @@ export function LoginForm() {
           type="password"
           required
           autoComplete="current-password"
-          className="w-full rounded-md border border-surface-border bg-surface px-3 py-2 text-sm outline-none focus:border-accent"
+          className="w-full rounded-lg border border-surface-border bg-surface px-3 py-2 text-sm text-foreground outline-none focus:border-accent"
         />
       </div>
-      {state.error && <p className="text-sm text-red-400">{state.error}</p>}
-      <button
-        type="submit"
-        disabled={pending}
-        className="w-full rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-foreground disabled:opacity-60"
-      >
+      {state.error && <p className="text-sm text-red-700">{state.error}</p>}
+      <button type="submit" disabled={pending} className="btn-primary w-full">
         {pending ? "Anmelden…" : "Anmelden"}
       </button>
     </form>
