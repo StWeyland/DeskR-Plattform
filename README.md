@@ -15,11 +15,13 @@ Supabase, eigenständiges Setup (kein gemeinsames Projekt mit MRH-Coaching).
 - [x] Branding von desk-revolution.de: Farbpalette + Typografie (League Spartan / Playfair
       Display) 1:1 übernommen (`src/app/globals.css`), Porträtfoto extern eingebunden
       (`next.config.ts` erlaubt `desk-revolution.de` als Bildquelle)
-- [ ] Supabase-Verbindungstest (Kickoff Abschnitt 0.1.3) — noch nicht von mir selbst
-      verifiziert. Der Netzwerkzugriff aus dieser Entwicklungsumgebung war zum Testzeitpunkt
-      für alle externen Domains blockiert (nicht nur Supabase) — vermutlich eine
-      Session-übergreifende Egress-Policy, die erst bei einer neu gestarteten Session greift.
-      Vercel-Deployment ist laut Rückmeldung grün; bitte bei Gelegenheit selbst gegenprüfen.
+- [x] Voraussetzungs-Check (Kickoff Abschnitt 0): GitHub-Push, Vercel-Deployment und
+      Supabase-Verbindung bestätigt. Der Live-Test in dieser Entwicklungsumgebung war durch
+      eine Egress-Policy blockiert (nicht Supabase-spezifisch); als Ersatz wurde die
+      Login-Seite auf dem Vercel-Deployment fehlerfrei mit korrektem Branding geladen — das
+      belegt eine funktionierende Verbindung zum richtigen, eigenständigen DeskR-Projekt.
+- [ ] Migration `0001_init.sql` — bereit, noch nicht im Supabase-Dashboard ausgeführt
+      (siehe unten)
 - [ ] SMTP (hallo@desk-revolution.de) — noch nicht eingerichtet
 - [ ] Phase 2 (Stripe) — bewusst noch nicht begonnen
 
