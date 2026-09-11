@@ -7,11 +7,16 @@ Supabase, eigenständiges Setup (kein gemeinsames Projekt mit MRH-Coaching).
 
 - [x] Next.js + Tailwind + Supabase-Grundgerüst
 - [x] Auth-Flow (Login, Passwort setzen nach Einladung), Session-Refresh via Middleware/Proxy
-- [x] Admin-Bereich: Programme anlegen, Sessions anlegen, Assistenzen einladen & zuordnen
+- [x] Admin-Bereich: Programme anlegen & bearbeiten, Sessions anlegen/bearbeiten/löschen,
+      Material pro Session verwalten (Video/Workbook/Datei/Link), Assistenzen einladen,
+      erneut einladen, löschen, Programmen zuordnen, Fortschritt pro Assistenz einsehen
+      (`/admin/assistenzen/[id]`)
 - [x] Assistenz-Bereich: Dashboard mit Fortschritts-Ring, Programmkarten, Teaser-Kacheln,
       Programm-Detailseite mit Session-Akkordeon + eigenem Bearbeitungsstatus
 - [x] SQL-Migration für die 6 Kern-Tabellen + RLS + Teaser-Felder
-      (`supabase/migrations/0001_init.sql`)
+      (`supabase/migrations/0001_init.sql`) — im Supabase-Dashboard ausgeführt
+- [ ] Seed-Migration für die vier Programme (`supabase/migrations/0002_seed_programme.sql`)
+      — bereit, noch nicht im Supabase-Dashboard ausgeführt (siehe unten)
 - [x] Branding von desk-revolution.de: Farbpalette + Typografie (League Spartan / Playfair
       Display) 1:1 übernommen (`src/app/globals.css`), Porträtfoto extern eingebunden
       (`next.config.ts` erlaubt `desk-revolution.de` als Bildquelle)
@@ -20,8 +25,6 @@ Supabase, eigenständiges Setup (kein gemeinsames Projekt mit MRH-Coaching).
       eine Egress-Policy blockiert (nicht Supabase-spezifisch); als Ersatz wurde die
       Login-Seite auf dem Vercel-Deployment fehlerfrei mit korrektem Branding geladen — das
       belegt eine funktionierende Verbindung zum richtigen, eigenständigen DeskR-Projekt.
-- [ ] Migration `0001_init.sql` — bereit, noch nicht im Supabase-Dashboard ausgeführt
-      (siehe unten)
 - [ ] SMTP (hallo@desk-revolution.de) — noch nicht eingerichtet
 - [ ] Phase 2 (Stripe) — bewusst noch nicht begonnen
 
