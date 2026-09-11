@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { assignProgramm, inviteAssistenz } from "./actions";
+import { ConfirmSubmitButton } from "@/components/confirm-submit-button";
+import { assignProgramm, deleteAssistenz, inviteAssistenz, resendInvite } from "./actions";
 
 export default async function AdminAssistenzenPage() {
   const supabase = await createClient();
@@ -50,13 +52,38 @@ export default async function AdminAssistenzenPage() {
             .filter((z) => z.assistenz_id === a.id)
             .map((z) => z.programm_id);
           const assignProgrammForAssistenz = assignProgramm.bind(null, a.id);
+          const resendInviteForAssistenz = resendInvite.bind(null, a.email);
+          const deleteAssistenzAction = deleteAssistenz.bind(null, a.id, a.user_id);
 
           return (
             <div key={a.id} className="space-y-2 px-5 py-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-serif text-lg text-burgundy">{a.name ?? a.email}</p>
+                  <Link
+                    href={`/admin/assistenzen/${a.id}`}
+                    className="font-serif text-lg text-burgundy hover:underline"
+                  >
+                    {a.name ?? a.email}
+                  </Link>
                   <p className="text-sm text-muted">{a.email}</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <form action={resendInviteForAssistenz}>
+                    <button
+                      type="submit"
+                      className="text-xs text-muted underline underline-offset-2 hover:text-foreground"
+                    >
+                      Erneut einladen
+                    </button>
+                  </form>
+                  <form action={deleteAssistenzAction}>
+                    <ConfirmSubmitButton
+                      confirmMessage={`${a.name ?? a.email} wirklich löschen? Das entfernt auch den Zugang und alle Zuordnungen.`}
+                      className="text-xs text-red-700 underline underline-offset-2"
+                    >
+                      Löschen
+                    </ConfirmSubmitButton>
+                  </form>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-2">

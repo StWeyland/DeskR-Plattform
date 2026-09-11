@@ -34,6 +34,19 @@ export async function resendInvite(email: string) {
   const admin = createAdminClient();
   const redirectTo = `${process.env.NEXT_PUBLIC_APP_URL}/set-password`;
   await admin.auth.admin.inviteUserByEmail(email, { redirectTo });
+  revalidatePath("/admin/assistenzen");
+}
+
+export async function deleteAssistenz(assistenzId: string, userId: string | null) {
+  const supabase = await createClient();
+  await supabase.from("assistenzen").delete().eq("id", assistenzId);
+
+  if (userId) {
+    const admin = createAdminClient();
+    await admin.auth.admin.deleteUser(userId);
+  }
+
+  revalidatePath("/admin/assistenzen");
 }
 
 export async function assignProgramm(assistenzId: string, formData: FormData) {
