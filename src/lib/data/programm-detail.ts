@@ -6,6 +6,7 @@ export interface SessionMitMaterial {
   titel: string;
   beschreibung: string | null;
   reihenfolge: number;
+  bild_url: string | null;
   material: SessionMaterial[];
   status: AssistenzStatusWert;
 }
@@ -40,6 +41,7 @@ export async function getProgrammMitSessions(slug: string, assistenzId: string) 
     titel: s.titel,
     beschreibung: s.beschreibung,
     reihenfolge: s.reihenfolge,
+    bild_url: s.bild_url,
     material: (s.session_material ?? []) as SessionMaterial[],
     status: (statusMap.get(s.id) as AssistenzStatusWert) ?? "offen",
   }));

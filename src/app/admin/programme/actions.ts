@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { uploadMedienDatei } from "@/lib/supabase/storage";
 import type { ProgrammStatus, SessionMaterialTyp } from "@/lib/types/database";
 
 export async function createProgramm(formData: FormData) {
@@ -44,6 +45,10 @@ export async function updateProgramm(programmId: string, formData: FormData) {
   if (!titel) return;
 
   const supabase = await createClient();
+  const bild = formData.get("bild");
+  const bildUrl =
+    bild instanceof File ? await uploadMedienDatei(supabase, bild, "programme") : null;
+
   await supabase
     .from("programme")
     .update({
@@ -53,11 +58,13 @@ export async function updateProgramm(programmId: string, formData: FormData) {
       teaser_aktiv: teaserAktiv,
       preis_anzeigen: preisAnzeigen,
       preis_cent: preisCent,
+      ...(bildUrl ? { bild_url: bildUrl } : {}),
     })
     .eq("id", programmId);
 
   revalidatePath(`/admin/programme/${programmId}`);
   revalidatePath("/admin/programme");
+  revalidatePath("/dashboard");
 }
 
 export async function createSession(programmId: string, formData: FormData) {
@@ -96,9 +103,18 @@ export async function updateSession(
   if (!titel) return;
 
   const supabase = await createClient();
+  const bild = formData.get("bild");
+  const bildUrl =
+    bild instanceof File ? await uploadMedienDatei(supabase, bild, "sessions") : null;
+
   await supabase
     .from("sessions")
-    .update({ titel, beschreibung, veroeffentlicht })
+    .update({
+      titel,
+      beschreibung,
+      veroeffentlicht,
+      ...(bildUrl ? { bild_url: bildUrl } : {}),
+    })
     .eq("id", sessionId);
 
   revalidatePath(`/admin/programme/${programmId}`);
@@ -113,11 +129,18 @@ export async function deleteSession(sessionId: string, programmId: string) {
 export async function addMaterial(sessionId: string, programmId: string, formData: FormData) {
   const typ = String(formData.get("typ") ?? "link") as SessionMaterialTyp;
   const titel = String(formData.get("titel") ?? "").trim();
-  const url = String(formData.get("url") ?? "").trim() || null;
+  const urlEingabe = String(formData.get("url") ?? "").trim() || null;
 
   if (!titel) return;
 
   const supabase = await createClient();
+
+  // Hochgeladene Datei hat Vorrang vor der eingegebenen URL.
+  const datei = formData.get("datei");
+  const hochgeladeneUrl =
+    datei instanceof File ? await uploadMedienDatei(supabase, datei, "material") : null;
+  const url = hochgeladeneUrl ?? urlEingabe;
+
   const { count } = await supabase
     .from("session_material")
     .select("id", { count: "exact", head: true })

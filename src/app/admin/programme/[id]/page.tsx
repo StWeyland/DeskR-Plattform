@@ -48,9 +48,33 @@ export default async function AdminProgrammDetailPage({
         <summary className="cursor-pointer px-5 py-3 text-sm font-medium">
           Programm bearbeiten
         </summary>
-        <form action={updateProgrammForProgramm} className="space-y-4 px-5 pb-5 pt-2">
+        <form
+          action={updateProgrammForProgramm}
+          encType="multipart/form-data"
+          className="space-y-4 px-5 pb-5 pt-2"
+        >
           <Field label="Titel" name="titel" defaultValue={programm.titel} required />
           <Field label="Untertitel" name="untertitel" defaultValue={programm.untertitel ?? ""} />
+          <div className="space-y-1">
+            <label className="text-sm text-muted" htmlFor="bild">
+              Bild
+            </label>
+            {programm.bild_url && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={programm.bild_url}
+                alt=""
+                className="mb-2 h-24 w-24 rounded-md object-cover"
+              />
+            )}
+            <input
+              id="bild"
+              name="bild"
+              type="file"
+              accept="image/*"
+              className="block w-full text-sm"
+            />
+          </div>
           <div className="space-y-1">
             <label className="text-sm text-muted" htmlFor="status">
               Status
@@ -116,7 +140,11 @@ export default async function AdminProgrammDetailPage({
                   </span>
                 </summary>
                 <div className="space-y-5 px-5 pb-5 pt-2">
-                  <form action={updateSessionForSession} className="space-y-3">
+                  <form
+                    action={updateSessionForSession}
+                    encType="multipart/form-data"
+                    className="space-y-3"
+                  >
                     <Field label="Titel" name="titel" defaultValue={s.titel} required />
                     <div className="space-y-1">
                       <label className="text-sm text-muted" htmlFor={`beschreibung-${s.id}`}>
@@ -128,6 +156,26 @@ export default async function AdminProgrammDetailPage({
                         defaultValue={s.beschreibung ?? ""}
                         rows={2}
                         className="w-full rounded-md border border-surface-border bg-background px-3 py-2 text-sm"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-sm text-muted" htmlFor={`bild-${s.id}`}>
+                        Bild
+                      </label>
+                      {s.bild_url && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={s.bild_url}
+                          alt=""
+                          className="mb-2 h-20 w-20 rounded-md object-cover"
+                        />
+                      )}
+                      <input
+                        id={`bild-${s.id}`}
+                        name="bild"
+                        type="file"
+                        accept="image/*"
+                        className="block w-full text-sm"
                       />
                     </div>
                     <label className="flex items-center gap-2 text-sm">
@@ -173,6 +221,7 @@ export default async function AdminProgrammDetailPage({
                     </ul>
                     <form
                       action={addMaterialForSession}
+                      encType="multipart/form-data"
                       className="flex flex-wrap items-end gap-2 pt-2"
                     >
                       <select
@@ -193,8 +242,14 @@ export default async function AdminProgrammDetailPage({
                       />
                       <input
                         name="url"
-                        placeholder="URL"
-                        className="min-w-[14rem] flex-1 rounded-md border border-surface-border bg-background px-2 py-1.5 text-xs"
+                        placeholder="URL (oder Datei hochladen)"
+                        className="min-w-[12rem] flex-1 rounded-md border border-surface-border bg-background px-2 py-1.5 text-xs"
+                      />
+                      <input
+                        name="datei"
+                        type="file"
+                        className="text-xs"
+                        title="Datei-Upload hat Vorrang vor der URL"
                       />
                       <button
                         type="submit"

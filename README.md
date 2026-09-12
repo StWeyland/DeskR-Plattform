@@ -17,6 +17,11 @@ Supabase, eigenständiges Setup (kein gemeinsames Projekt mit MRH-Coaching).
       (`supabase/migrations/0001_init.sql`) — im Supabase-Dashboard ausgeführt
 - [ ] Seed-Migration für die vier Programme (`supabase/migrations/0002_seed_programme.sql`)
       — bereit, noch nicht im Supabase-Dashboard ausgeführt (siehe unten)
+- [ ] Bild-/Datei-Upload (Branch `feature/bild-und-datei-upload`): `bild_url` auf
+      Programm/Session, öffentlicher Storage-Bucket `programm-medien` (nur Admin darf
+      schreiben), Bild-Upload beim Bearbeiten von Programm/Session, Datei-Upload im
+      Material-Formular (hat Vorrang vor der URL) — Migration
+      `supabase/migrations/0003_medien_upload.sql` bereit, noch nicht ausgeführt
 - [x] Branding von desk-revolution.de: Farbpalette + Typografie (League Spartan / Playfair
       Display) 1:1 übernommen (`src/app/globals.css`), Porträtfoto extern eingebunden
       (`next.config.ts` erlaubt `desk-revolution.de` als Bildquelle)

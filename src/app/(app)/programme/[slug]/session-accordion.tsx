@@ -29,9 +29,19 @@ export function SessionAccordion({
     <div className="divide-y divide-surface-border rounded-lg border border-surface-border bg-surface">
       {sessions.map((session) => (
         <details key={session.id} className="group px-5 py-4">
-          <summary className="flex cursor-pointer list-none items-center justify-between">
-            <span className="font-medium">{session.titel}</span>
-            <span className="text-xs text-muted">{STATUS_LABEL[session.status]}</span>
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
+            <span className="flex items-center gap-3">
+              {session.bild_url && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={session.bild_url}
+                  alt=""
+                  className="h-10 w-10 shrink-0 rounded-md object-cover"
+                />
+              )}
+              <span className="font-medium">{session.titel}</span>
+            </span>
+            <span className="shrink-0 text-xs text-muted">{STATUS_LABEL[session.status]}</span>
           </summary>
           <div className="mt-3 space-y-3">
             {session.beschreibung && (
