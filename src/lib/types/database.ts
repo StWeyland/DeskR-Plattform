@@ -19,6 +19,7 @@ export interface Database {
           teaser_aktiv: boolean;
           preis_anzeigen: boolean;
           preis_cent: number | null;
+          bild_url: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -33,6 +34,7 @@ export interface Database {
           teaser_aktiv?: boolean;
           preis_anzeigen?: boolean;
           preis_cent?: number | null;
+          bild_url?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -47,6 +49,7 @@ export interface Database {
           teaser_aktiv?: boolean;
           preis_anzeigen?: boolean;
           preis_cent?: number | null;
+          bild_url?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -60,6 +63,7 @@ export interface Database {
           beschreibung: string | null;
           reihenfolge: number;
           veroeffentlicht: boolean;
+          bild_url: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -70,6 +74,7 @@ export interface Database {
           beschreibung?: string | null;
           reihenfolge?: number;
           veroeffentlicht?: boolean;
+          bild_url?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -80,6 +85,7 @@ export interface Database {
           beschreibung?: string | null;
           reihenfolge?: number;
           veroeffentlicht?: boolean;
+          bild_url?: string | null;
           created_at?: string;
           updated_at?: string;
         };
